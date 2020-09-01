@@ -3,13 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:weightSum="10"
+    android:gravity="center"
     android:background="@color/colorBackgroundFragment"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.7"
+        android:src="@drawable/ic_crown"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/imcresoojin"
+        android:gravity="center"
+        android:text="Top Player"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="40dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/rank_remaining_time"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="랭크 초기화 시간 : "
+        android:gravity="center"
+        android:textSize="20dp"
+        android:fontFamily="@font/imcresoojin"
+        android:layout_weight="1"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rank_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="rank" />
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
+
 </LinearLayout>

@@ -37,7 +37,7 @@ import info.hoang8f.widget.FButton;
 public class HomeFragment extends Fragment {
 
     private View view;
-    private FButton play;
+    private Button play;
 
     public HomeFragment(){}
 
@@ -51,10 +51,10 @@ public class HomeFragment extends Fragment {
 
     private void init(){
 
-//        play = (FButton) view.findViewById(R.id.play_button);
-//        play.setOnClickListener(v->{
-//            startActivity(new Intent(getActivity(),PlayActivity.class));
-//        });
+        play = (Button) view.findViewById(R.id.play_button);
+        play.setOnClickListener(v->{
+            startActivity(new Intent(getActivity(),PlayActivity.class));
+        });
     }
 
 }

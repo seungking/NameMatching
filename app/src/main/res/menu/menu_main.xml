@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item android:title="Home" android:id="@+id/item_home"
+        app:showAsAction="always" android:icon="@drawable/ic_baseline_house_30"/>
+
+    <item android:title="Rank" android:id="@+id/item_rank"
+        app:showAsAction="always" android:icon="@drawable/ic_rank"/>
+
+    <item android:title="Account" android:id="@+id/item_account"
+        app:showAsAction="always" android:icon="@drawable/ic_baseline_account_circle_30"/>
+
+</menu>

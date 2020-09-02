@@ -1,20 +1,20 @@
 package com.e.namematching.model;
 
 public class GameData {
-    private int stage;
-    private int hp;
-    private int show;
-    private int chance;
-    private int hp_chance;
-    private int show_change;
+    private int stage; //스테이지횟수
+    private int hp; //기회
+    private int show; //한판마다 볼 수 있는 횟수
+    private int chance; //스킵 횟수
+    private int hp_chance; //광고 1회 보고 hp 회복
+    private int show_change; //광고 1회 보고 볼 수 있는 횟수 2회 증가
 
-    public GameData(int stage, int hp, int show, int chance, int hp_chance, int show_change) {
-        this.stage = stage;
-        this.hp = hp;
-        this.show = show;
-        this.chance = chance;
-        this.hp_chance = hp_chance;
-        this.show_change = show_change;
+    public GameData() {
+        this.stage = 1;
+        this.hp = 3;
+        this.show = 3;
+        this.chance = 1;
+        this.hp_chance = 1;
+        this.show_change = 1;
     }
 
     public int getStage() {

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.e.namematching.BuildConfig;
 import com.e.namematching.R;
 
 import org.json.JSONArray;
@@ -32,9 +33,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AccountFragment extends Fragment {
 
     private View view;
+
 //    private MaterialToolbar toolbar;
 //    private CircleImageView imgProfile;
 //    private TextView txtName,txtPostsCount;
@@ -51,14 +56,13 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_account,container,false);
+        ButterKnife.bind(this,view);
         init();
         return view;
     }
 
     private void init() {
 
-
     }
-
 
 }

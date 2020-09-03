@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relative"
             android:layout_width="match_parent"
-            android:background="#d0efff"
+            android:background="@color/colorBackgroundFragment"
             android:layout_height="0dp"
             android:layout_weight="3">
 
@@ -40,26 +40,28 @@
 
             <TextView
                 android:id="@+id/account_name"
-                android:layout_width="152dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User Name"
+                android:fontFamily="@font/imcresoojin"
+                android:text="@string/app_name_kor"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/account_profile"
-                android:textColor="#000000"
+                android:textColor="@color/textColor"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/account_profile"
-                android:layout_width="146dp"
-                android:layout_height="126dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintTop_toBottomOf="@+id/account_name"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

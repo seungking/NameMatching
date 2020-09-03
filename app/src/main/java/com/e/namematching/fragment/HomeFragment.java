@@ -32,12 +32,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import info.hoang8f.widget.FButton;
+import stream.custombutton.CustomButton;
 
 public class HomeFragment extends Fragment {
 
     private View view;
-    private Button play;
+    private CustomButton play;
 
     public HomeFragment(){}
 
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
     private void init(){
 
-        play = (Button) view.findViewById(R.id.play_button);
+        play = view.findViewById(R.id.play_button);
         play.setOnClickListener(v->{
             startActivity(new Intent(getActivity(),PlayActivity.class));
         });

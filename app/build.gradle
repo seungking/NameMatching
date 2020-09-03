@@ -41,7 +41,9 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
-    implementation 'info.hoang8f:fbutton:1.0.5'
+    implementation 'com.github.amirkateb:AnimationDialogAndroid:1.1.1'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.github.searchy2:CustomButton:1.9.1'
 }

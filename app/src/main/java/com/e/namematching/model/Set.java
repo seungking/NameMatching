@@ -64,4 +64,11 @@ public class Set {
     public void seto4(String o4) {
         this.o4 = o4;
     }
+
+    public String getAnswerString() {
+        if(answer==1) return o1;
+        else if(answer==2) return o2;
+        else if(answer==3) return o3;
+        else return o4;
+    }
 }

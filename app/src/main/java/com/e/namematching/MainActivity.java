@@ -12,18 +12,44 @@ import android.view.MenuItem;
 import com.e.namematching.fragment.AccountFragment;
 import com.e.namematching.fragment.HomeFragment;
 import com.e.namematching.fragment.RankFragment;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private BottomNavigationView navigationView;
+    private AdView mAdView;
+    private FirebaseDatabase mFirebaseDatase;
+    private DatabaseReference mChatRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //배너광고
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //
+
+        mFirebaseDatase = FirebaseDatabase.getInstance();
+        mChatRef = mFirebaseDatase.getReference("users");
+        mChatRef.setValue(1);
+
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frameHomeContainer,new HomeFragment(), HomeFragment.class.getSimpleName()).commit();
         init();

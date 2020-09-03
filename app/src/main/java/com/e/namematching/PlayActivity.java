@@ -1,10 +1,12 @@
 package com.e.namematching;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +31,21 @@ import com.e.namematching.model.GameData;
 import com.e.namematching.model.Set;
 import com.e.namematching.model.Solution;
 import com.example.animationdialog.AnimationDialog;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdCallback;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 import java.util.ArrayList;
 
@@ -104,14 +121,62 @@ public class PlayActivity extends AppCompatActivity {
 
     Button[] dialog_buttons;
 
+    private AdView mAdView;
+
+    private RewardedAd rewardedAd;
+    private RewardedVideoAd mRewardedVideoAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         setContentView(R.layout.activity_play);
 
+        //배너광고
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //
+
+        //리워드 광고
+        rewardedAd = new RewardedAd(this,
+                "ca-app-pub-3940256099942544/5224354917");
+        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+            @Override
+            public void onRewardedAdLoaded() {
+                // Ad successfully loaded.
+            }
+
+            @Override
+            public void onRewardedAdFailedToLoad(LoadAdError adError) {
+                // Ad failed to load.
+            }
+        };
+        rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
+        //
+
         initdata();
         init();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (!mRewardedVideoAd.isLoaded()) {
+            Log.d("log1", "loadrewardvideoad restart");
+            loadRewardedVideoAd();
+        }
+    }
+
+    private void loadRewardedVideoAd() {
+        Log.d("log1", "loadrewardvideoad");
+        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",
+                new AdRequest.Builder().build());
     }
 
     public void initdata(){
@@ -182,7 +247,7 @@ public class PlayActivity extends AppCompatActivity {
         telescope_plus.setOnClickListener(v->{
             Button[] buttons;
             buttons=AnimationDialog.init(this,false);
-            AnimationDialog.create("3회 보기를 추가하시겠습니까?","남은 기회 : 1번","NotOk!");
+            AnimationDialog.create("3회 보기를 추가하시겠습니까?","남은 기회 : 1번","Not Ok!");
             AnimationDialog.add_secend_button("OK!");
             buttons[0].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -193,13 +258,43 @@ public class PlayActivity extends AppCompatActivity {
             buttons[1].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    telescope_plus.setImageResource(R.drawable.telescope_plus_used);
-                    telescope_plus.setClickable(false);
-                    gameData.setChance(gameData.getChance()-1);
-                    gameData.setShow(3 + gameData.getShow());
-                    show.setClickable(true);
-                    show_count.setText(String.valueOf(gameData.getShow()));
-                    AnimationDialog.close();
+                    Log.d("log1", "ok");
+                    if (rewardedAd.isLoaded()) {
+                        Activity activityContext = PlayActivity.this;
+                        RewardedAdCallback adCallback = new RewardedAdCallback() {
+                            @Override
+                            public void onRewardedAdOpened() {
+                                // Ad opened.
+                                AnimationDialog.close();
+                            }
+
+                            @Override
+                            public void onRewardedAdClosed() {
+                                // Ad closed.
+                                AnimationDialog.close();
+                            }
+
+                            @Override
+                            public void onUserEarnedReward(@NonNull com.google.android.gms.ads.rewarded.RewardItem rewardItem) {
+                                telescope_plus.setImageResource(R.drawable.telescope_plus_used);
+                                telescope_plus.setClickable(false);
+                                gameData.setChance(gameData.getChance()-1);
+                                gameData.setShow(3 + gameData.getShow());
+                                show.setClickable(true);
+                                show_count.setText(String.valueOf(gameData.getShow()));
+                                AnimationDialog.close();
+                            }
+
+                            @Override
+                            public void onRewardedAdFailedToShow(AdError adError) {
+                                // Ad failed to display.
+                                AnimationDialog.close();
+                            }
+                        };
+                        rewardedAd.show(activityContext, adCallback);
+                    } else {
+                        Log.d("TAG", "The rewarded ad wasn't loaded yet.");
+                    }
                 }
             });
             AnimationDialog.show();
@@ -272,10 +367,40 @@ public class PlayActivity extends AppCompatActivity {
                 buttons[1].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        gameData.setHp_chance(0);
-                        gameData.setHp(1);
-                        hp1.setImageResource(R.drawable.hearticon);
-                        AnimationDialog.close();
+                        Log.d("log1", "ok");
+                        if (rewardedAd.isLoaded()) {
+                            Activity activityContext = PlayActivity.this;
+                            RewardedAdCallback adCallback = new RewardedAdCallback() {
+                                @Override
+                                public void onRewardedAdOpened() {
+                                    // Ad opened.
+                                    AnimationDialog.close();
+                                }
+
+                                @Override
+                                public void onRewardedAdClosed() {
+                                    // Ad closed.
+                                    AnimationDialog.close();
+                                }
+
+                                @Override
+                                public void onUserEarnedReward(@NonNull com.google.android.gms.ads.rewarded.RewardItem rewardItem) {
+                                    gameData.setHp_chance(0);
+                                    gameData.setHp(1);
+                                    hp1.setImageResource(R.drawable.hearticon);
+                                    AnimationDialog.close();
+                                }
+
+                                @Override
+                                public void onRewardedAdFailedToShow(AdError adError) {
+                                    // Ad failed to display.
+                                    AnimationDialog.close();
+                                }
+                            };
+                            rewardedAd.show(activityContext, adCallback);
+                        } else {
+                            Log.d("TAG", "The rewarded ad wasn't loaded yet.");
+                        }
                     }
                 });
                 AnimationDialog.show();
@@ -335,4 +460,5 @@ public class PlayActivity extends AppCompatActivity {
         mAnimationDialog.set_image(res);
         mAnimationDialog.show();
     }
+
 }

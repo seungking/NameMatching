@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:id="@+id/frameHomeContainer"></FrameLayout>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -20,10 +20,27 @@
         android:clickable="false"
         android:focusable="false">
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_app"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center|bottom"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        </com.google.android.gms.ads.AdView>
+
         <com.google.android.material.bottomappbar.BottomAppBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_app"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_gravity="bottom"
             android:clickable="false"
             app:fabAlignmentMode="center"
@@ -31,7 +48,8 @@
             android:theme="@style/AppTheme.BottomAppbar"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
-            android:background="@android:color/transparent">
+            android:background="@android:color/transparent"
+            tools:ignore="BottomAppBar">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="match_parent"
@@ -49,7 +67,6 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

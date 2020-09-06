@@ -6,12 +6,10 @@ public class RankUser {
 
     private String name;
     private int score;
-    private Bitmap flag;
 
-    public RankUser(String name, int score, Bitmap flag) {
+    public RankUser(String name, int score) {
         this.name = name;
         this.score = score;
-        this.flag = flag;
     }
 
     public String getName() {
@@ -30,11 +28,4 @@ public class RankUser {
         this.score = score;
     }
 
-    public Bitmap getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Bitmap flag) {
-        this.flag = flag;
-    }
 }

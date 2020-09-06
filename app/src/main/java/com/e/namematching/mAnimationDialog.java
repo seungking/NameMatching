@@ -15,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
+import static com.example.animationdialog.AnimationDialog.lottieAnimationView;
+
 
 public class mAnimationDialog {
 
@@ -107,5 +111,13 @@ return img;
         MediaPlayer mp = MediaPlayer.create(context_full,sound_row_resid);
         mp.start();
         return mp;
+    }
+
+    public static LottieAnimationView set_animation(String file_name, String color_hex){
+        img.setVisibility(View.GONE);
+        lottieAnimationView.setAnimation ("finish_game.json");
+        lottieAnimationView.setBackgroundColor(Color.parseColor("#ffffff"));
+        lottieAnimationView.setVisibility(View.VISIBLE);
+        return lottieAnimationView;
     }
 }

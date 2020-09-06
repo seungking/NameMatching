@@ -35,11 +35,11 @@ public class RankFragment extends Fragment {
         init();
         setdata();
 
-        recyclerView = view.findViewById(R.id.rank_list);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new RankAdapter(getContext(),arrayList);
-        recyclerView.setAdapter(adapter);
+//        recyclerView = view.findViewById(R.id.rank_list);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        adapter = new RankAdapter(getContext(),arrayList);
+//        recyclerView.setAdapter(adapter);
         return view;
     }
 
@@ -49,8 +49,8 @@ public class RankFragment extends Fragment {
     }
 
     public void setdata(){
-        for(int i=0; i<10; i++){
-            arrayList.add(new RankUser("안승기" + String.valueOf(i), i, null));
-        }
+//        for(int i=0; i<10; i++){
+//            arrayList.add(new RankUser("안승기" + String.valueOf(i), i, null));
+//        }
     }
 }

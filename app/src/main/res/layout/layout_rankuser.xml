@@ -14,24 +14,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_weight="1"
             android:padding="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+
+                android:layout_weight="0.2"
                 android:id="@+id/rankuser_flag"
                 android:src="@drawable/ic_baseline_settings_24"/>
+
             <LinearLayout
+                android:layout_marginStart="10dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:paddingLeft="6dp"
+                android:weightSum="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
+                    android:layout_weight="0.7"
                     android:id="@+id/rankuser_name"
                     android:textColor="#000000"
                     android:textStyle="bold"
@@ -41,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
+                    android:layout_weight="0.3"
                     android:id="@+id/rankuser_score"
                     android:textColor="#000000"
                     android:text="Jun 13"/>

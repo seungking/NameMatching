@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:background="@color/colorBackgroundFragment"
     android:weightSum="10"
+    android:textAllCaps="false"
     tools:context=".PlayActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +40,7 @@
         android:textSize="20dp"
         android:textColor="@color/textColor"
         android:layout_margin="15dp"
-        android:fontFamily="@font/imcresoojin"
+        android:fontFamily="@font/g_bold"
         android:text="STAGE 1"/>
 
         <ImageView
@@ -50,7 +51,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="15dp"
-            android:src="@drawable/soundon"
+            android:src="@drawable/ic_baseline_volume_up_24"
             android:layout_marginBottom="120dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -59,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
+        android:weightSum="1"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -68,31 +70,40 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textColor="@color/textColor"
-            android:fontFamily="@font/imcresoojin"
+            android:fontFamily="@font/g_medium"
             android:textSize="20dp"
-            android:text="score : "/>
+            android:layout_weight="0.2"
+            android:textAllCaps="false"
+            android:text=" 점수 : "/>
 
         <RelativeLayout
-            android:layout_width="100dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
             android:layout_height="0dp"/>
 
         <ImageView
             android:id="@+id/hp1"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.1"
             android:src="@drawable/hearticon"/>
         <ImageView
             android:id="@+id/hp2"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
+            android:layout_weight="0.1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:src="@drawable/hearticon"/>
         <ImageView
             android:id="@+id/hp3"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
+            android:layout_weight="0.1"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/hearticon"/>
     </LinearLayout>
 
@@ -100,6 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
+        android:layout_margin="10dp"
         android:background="@color/colorBackgroundFragment2"
         android:orientation="vertical">
 
@@ -176,7 +188,7 @@
             android:id="@+id/play_show_change_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/imcresoojin"
+            android:fontFamily="@font/g_bold"
             android:text="3"
             android:textColor="#ffffff"
             app:layout_constraintStart_toEndOf="@+id/telescope"
@@ -210,11 +222,12 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:id="@+id/play_question"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:text="구름은 몇 개 일까요?"
-        android:fontFamily="@font/imcresoojin"
+        android:fontFamily="@font/g_bold"
         android:textColor="@color/textColor"
         android:textSize="23dp"
         android:layout_margin="3dp"
@@ -223,6 +236,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:layout_marginTop="10dp"
         android:layout_weight="2.5">
 
@@ -248,7 +262,7 @@
                 android:textSize="18sp"
                 android:singleLine="true"
                 android:ellipsize="none"
-                android:fontFamily="@font/imcresoojin"
+                android:fontFamily="@font/g_bold"
                 app:btn_cornerRadius="20dp"
                 app:btn_strokeWidth="1dp"
                 app:btn_strokeColor="@color/colorMain"
@@ -269,7 +283,7 @@
                 android:textSize="18sp"
                 android:singleLine="true"
                 android:ellipsize="none"
-                android:fontFamily="@font/imcresoojin"
+                android:fontFamily="@font/g_bold"
                 app:btn_cornerRadius="20dp"
                 app:btn_strokeWidth="1dp"
                 app:btn_strokeColor="@color/colorMain"
@@ -301,7 +315,7 @@
                 android:textSize="18sp"
                 android:singleLine="true"
                 android:ellipsize="none"
-                android:fontFamily="@font/imcresoojin"
+                android:fontFamily="@font/g_bold"
                 app:btn_cornerRadius="20dp"
                 app:btn_strokeWidth="1dp"
                 app:btn_strokeColor="@color/colorMain"
@@ -322,7 +336,7 @@
                 android:textSize="18sp"
                 android:singleLine="true"
                 android:ellipsize="none"
-                android:fontFamily="@font/imcresoojin"
+                android:fontFamily="@font/g_bold"
                 app:btn_cornerRadius="20dp"
                 app:btn_strokeWidth="1dp"
                 app:btn_strokeColor="@color/colorMain"

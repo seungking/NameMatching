@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:orientation="vertical"
+    tools:context=".SetAccount">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:fontFamily="@font/g_bold"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:text="정보를 입력해주세요"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:fontFamily="@font/g_medium"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:text="랭킹 등록에 사용됩니다"/>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:src="#999999"
+        android:id="@+id/imgUserInfo"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/g_medium"
+        android:text="사진 가져오기"
+        android:textColor="#2196f1"
+        android:gravity="center_horizontal"
+        android:id="@+id/txtSelectPhoto"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/txtLayoutNameUserInfo"
+        android:layout_marginBottom="30dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/g_bold"
+            android:id="@+id/txtNameUserInfo"
+            android:hint="이름"
+            android:inputType="text"
+            android:textSize="15sp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:text="Continue"
+        android:id="@+id/btnContinue"
+        android:fontFamily="@font/g_bold"
+        android:background="@drawable/corners"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="70dp"
+        android:textSize="17dp"
+        android:textAllCaps="false"/>
+
+
+</LinearLayout>

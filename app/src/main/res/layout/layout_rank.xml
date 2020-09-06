@@ -8,16 +8,35 @@
     android:background="@color/colorBackgroundFragment"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_crown"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_baseline_refresh_24"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fontFamily="@font/imcresoojin"
+        android:fontFamily="@font/g_bold"
         android:gravity="center"
         android:text="Top Player"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -30,15 +49,34 @@
         android:text="랭크 초기화 시간 : "
         android:gravity="center"
         android:textSize="20dp"
-        android:fontFamily="@font/imcresoojin"
+        android:fontFamily="@font/g_bold"
         android:layout_weight="1"/>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rank_list"
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rank_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="7"/>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_margin="15dp"
         android:layout_height="0dp"
-        android:layout_weight="7"/>
+        android:layout_weight="7">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20dp"
+            android:text="업데이트 준비 중 입니다"
+            android:fontFamily="@font/g_medium"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relative"
             android:layout_width="match_parent"
-            android:background="@color/colorBackgroundFragment"
+            android:background="@color/colorMain"
             android:layout_height="0dp"
             android:layout_weight="3">
 
@@ -42,8 +42,8 @@
                 android:id="@+id/account_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/imcresoojin"
-                android:text="@string/app_name_kor"
+                android:fontFamily="@font/j_bold"
+                android:text="Account_Name"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +82,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="768"
+                    android:text="0"
+                    android:id="@+id/account_score"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -106,7 +107,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="34"
+                    android:text="0"
+                    android:id="@+id/account_rank"
                     android:textColor="#000000"
                     android:textStyle="bold" />
 
@@ -120,14 +122,130 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="4"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/setting_edit_account"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/corners_setting"
+                android:gravity="center"
+                android:clickable="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/setting_sound"
+                app:layout_constraintBottom_toTopOf="@+id/setting_feedback">
+                
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_baseline_person_24"/>
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="프로필 수정"/>
+                
+            </LinearLayout>
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/setting_sound"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/setting_edit_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/setting_donation">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_baseline_volume_up_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="소리 ON"/>
+                
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/setting_feedback"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toBottomOf="@+id/setting_edit_account"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/setting_donation">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_baseline_feedback_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="피드백 보내기"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/setting_donation"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/corners_setting"
+                app:layout_constraintTop_toBottomOf="@+id/setting_sound"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/setting_feedback">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_baseline_monetization_on_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/g_medium"
+                    android:text="개발자를 위한 기부함"/>
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

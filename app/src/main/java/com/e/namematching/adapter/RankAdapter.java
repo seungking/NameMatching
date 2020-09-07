@@ -1,6 +1,7 @@
 package com.e.namematching.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.e.namematching.R;
 import com.e.namematching.model.RankUser;
+import com.e.namematching.model.functions;
 
 import java.util.ArrayList;
 
@@ -73,6 +75,8 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.Myholder>{
     private Context context;
     private ArrayList<RankUser> arrayList;
 
+    private functions f = new functions();
+
     public RankAdapter(Context context, ArrayList<RankUser> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
@@ -88,9 +92,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.Myholder>{
 
     @Override
     public void onBindViewHolder(@NonNull Myholder holder, int position) {
-        //        holder.flag.setImageResource();
+
         RankUser rankUser = arrayList.get(position);
-        Log.d("log1", "1" + rankUser.getName());
+        holder.photo.setImageBitmap(f.StringToBitmap(rankUser.getProfile()));
         holder.name.setText(rankUser.getName());
         holder.score.setText(String.valueOf(rankUser.getScore()));
     }
@@ -103,17 +107,15 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.Myholder>{
 
     class Myholder extends RecyclerView.ViewHolder {
 
-        //        private CircleImageView flag;
         private TextView name;
         private TextView score;
+        private ImageView photo;
 
         public Myholder(@NonNull View itemView) {
             super(itemView);
-            //            flag = itemView.findViewById(R.id.rankuser_flag);
+            photo = itemView.findViewById(R.id.rankuser_photo);
             name = itemView.findViewById(R.id.rankuser_name);
-            Log.d("log1",name.toString());
             score = itemView.findViewById(R.id.rankuser_score);
-
         }
     }
 }

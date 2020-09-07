@@ -4,14 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.RenderNode;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,10 +25,13 @@ import com.e.namematching.model.GameData;
 import com.e.namematching.model.RankUser;
 import com.e.namematching.model.Set;
 import com.e.namematching.model.Solution;
+import com.e.namematching.model.functions;
+import com.e.namematching.model.mAnimationDialog;
 import com.example.animationdialog.AnimationDialog;
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
@@ -37,15 +41,10 @@ import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
@@ -136,15 +135,12 @@ public class PlayActivity extends AppCompatActivity {
     private AdView mAdView;
     private RewardedAd rewardedAd;
     private RewardedVideoAd mRewardedVideoAd;
+    private InterstitialAd mInterstitialAd;
 
+    //database
     private FirebaseDatabase mFirebaseDatase;
     private DatabaseReference mUser;
     private FirebaseAnalytics mFirebaseAnalytics;
-
-    static {
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,8 +149,8 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play);
 
         mFirebaseDatase = FirebaseDatabase.getInstance();
+        mUser = mFirebaseDatase.getReference("list");
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        mUser = mFirebaseDatase.getReference("list").child("aaa");
 
         //배너광고
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -165,6 +161,12 @@ public class PlayActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        //
+
+        //전면광고
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
         //
 
         //리워드 광고
@@ -183,6 +185,7 @@ public class PlayActivity extends AppCompatActivity {
         };
         rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
         //
+
 
         initdata();
         init();
@@ -263,6 +266,10 @@ public class PlayActivity extends AppCompatActivity {
         setnext();
 
         //소리체크
+        soundcheck = sharedPreferences.getInt("sound",1);
+        if(soundcheck==1) sound.setImageResource(R.drawable.ic_baseline_volume_up_24);
+        else if(soundcheck==0)sound.setImageResource(R.drawable.ic_baseline_volume_off_24);
+
         sound.setOnClickListener(v->{
             if(soundcheck==1) sound.setImageResource(R.drawable.ic_baseline_volume_off_24);
             else if(soundcheck==0)sound.setImageResource(R.drawable.ic_baseline_volume_up_24);
@@ -480,7 +487,7 @@ public class PlayActivity extends AppCompatActivity {
         play_question.setText(curset.getQuestion());
         stage.setText("STAGE " + gameData.getStage());
         score.setText(" 점수 : " + gameData.getScore());
-        gameData.setShow(3);
+        gameData.setShow(2);
         show_count.setText(String.valueOf(gameData.getShow()));
         show.setClickable(true);
         
@@ -543,21 +550,28 @@ public class PlayActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         int prev_score = sharedPreferences.getInt("score",0);
         if(prev_score<gameData.getScore()) {
+            mUser.child(sharedPreferences.getString("id","")).setValue(new RankUser(sharedPreferences.getString("photo",""),sharedPreferences.getString("name",""),gameData.getScore()));
             editor.putInt("score", gameData.getScore());
             editor.commit();
         }
 
         Button[] buttons;
         buttons=mAnimationDialog.init(this,false);
-        mAnimationDialog.create("게임이 끝났습니다","점수 : " + gameData.getScore(),"확인");
+        mAnimationDialog.create("점수 : " + gameData.getScore(),"순위를 업데이트 해주세요","확인");
         mAnimationDialog.set_image(getResources().getDrawable(R.drawable.gameover));
 //        AnimationDialog.set_parent_background("#7171ff");
         buttons[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mUser.setValue(new RankUser(sharedPreferences.getString("name","aa"),gameData.getScore()));
-                finish();
+
+
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                }
 //                AnimationDialog.close();
+                finish();
             }
         });
 

@@ -1,4 +1,4 @@
-package com.e.namematching;
+package com.e.namematching.model;
 
 
 import android.app.Dialog;
@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.e.namematching.R;
 
 import static com.example.animationdialog.AnimationDialog.lottieAnimationView;
 

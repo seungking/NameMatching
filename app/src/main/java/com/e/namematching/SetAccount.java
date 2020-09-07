@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.e.namematching.model.functions;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
@@ -49,6 +51,7 @@ public class SetAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_account);
+
         init();
     }
 
@@ -79,6 +82,11 @@ public class SetAccount extends AppCompatActivity {
         btnContinue = findViewById(R.id.btnContinue);
         circleImageView = findViewById(R.id.imgUserInfo);
 
+        if(userPref.getString("photo","").length()>1){
+            circleImageView.setImageBitmap(new functions().StringToBitmap(userPref.getString("photo","")));
+            txtName.setText(userPref.getString("name",""));
+        }
+
         //갤러리에서 사진 가져옴
         txtSelectPhoto.setOnClickListener(v->{
             Intent i = new Intent(Intent.ACTION_PICK);
@@ -106,22 +114,25 @@ public class SetAccount extends AppCompatActivity {
 
     private void saveUserInfo(){
         SharedPreferences.Editor editor = userPref.edit();
-        editor.putString("photo",bitmapToString(bitmap));
+        if(bitmap!=null)editor.putString("photo",new functions().bitmapToString(bitmap));
         editor.putString("name",txtName.getText().toString().trim());
         editor.apply();
-        startActivity(new Intent(SetAccount.this,MainActivity.class));
+        if(getIntent().getIntExtra("from",0)==0){
+            startActivity(new Intent(SetAccount.this,MainActivity.class));
+        }
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         finish();
     }
 
-    private String bitmapToString(Bitmap bitmap) {
-        if (bitmap!=null){
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
-            byte [] array = byteArrayOutputStream.toByteArray();
-            return Base64.encodeToString(array,Base64.DEFAULT);
-        }
 
-        return "";
+
+    public Bitmap StringToBitmap(String str) {
+        try {
+            byte[] decode = Base64.decode(str, 0);
+            return BitmapFactory.decodeByteArray(decode, 0, decode.length);
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

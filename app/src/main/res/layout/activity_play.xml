@@ -189,7 +189,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/g_bold"
-            android:text="3"
+            android:text="2"
             android:textColor="#ffffff"
             app:layout_constraintStart_toEndOf="@+id/telescope"
             app:layout_constraintTop_toTopOf="parent"

@@ -2,16 +2,25 @@ package com.e.namematching;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.media.MediaDrm;
 import android.media.SoundPool;
+import android.media.UnsupportedSchemeException;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,6 +28,8 @@ import android.widget.Toast;
 import com.e.namematching.fragment.AccountFragment;
 import com.e.namematching.fragment.HomeFragment;
 import com.e.namematching.fragment.RankFragment;
+import com.e.namematching.model.RankUser;
+import com.e.namematching.model.functions;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -32,6 +43,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.UUID;
 
 import es.dmoral.toasty.Toasty;
 
@@ -49,12 +62,20 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mUser;
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    static {
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+    }
+
+
     //Sound
-    static SoundPool soundPool;	//작성
-    static int soundID;		//작성
+    public static SoundPool soundPool;	//작성
+    public static int soundID;		//작성
 
     int maxscore=0;
     SharedPreferences sharedPreferences;
+
+    public static int soundcheck=1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,28 +102,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
         mFirebaseDatase = FirebaseDatabase.getInstance();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mUser = mFirebaseDatase.getReference("list").child("aaa");
 
-        ValueEventListener postListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Post object and use the values to update the UI
-                editor.putInt("score", dataSnapshot.getValue(Integer.class));
-                editor.commit();
-                // ...
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                // ...
-            }
-        };
-        mUser.child("name").addValueEventListener(postListener);
+//        ValueEventListener postListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                editor.putInt("score", dataSnapshot.getValue(Integer.class));
+//                editor.commit();
+//                // ...
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Getting Post failed, log a message
+//                // ...
+//            }
+//        };
+//        mUser.child("name").addValueEventListener(postListener);
 
 
         Log.d("log1","main resume music start");
@@ -114,8 +133,11 @@ public class MainActivity extends AppCompatActivity {
         int waitCounter = 0;
         int throttle = 10;
 
-        while(soundPool.play(soundID,1,1,0,-1,1) == 0 && waitCounter < waitLimit){
-            waitCounter++; SystemClock.sleep(throttle);
+        if(soundcheck==1) {
+            while (soundPool.play(soundID, 1, 1, 0, -1, 1) == 0 && waitCounter < waitLimit) {
+                waitCounter++;
+                SystemClock.sleep(throttle);
+            }
         }
 
     }
@@ -139,6 +161,23 @@ public class MainActivity extends AppCompatActivity {
     private void init(){
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(soundcheck==1){
+            editor = sharedPreferences.edit();
+            editor.putInt("sound",1);
+            editor.commit();
+        }
+
+        if(sharedPreferences.getString("uuid","").length()==0){
+            editor.putString("uuid",sharedPreferences.getString("id",""));
+            editor.commit();
+        }
+
+        if(sharedPreferences.getString("id","").length()==0){
+            editor.putString("id",new functions().getUniqueID());
+            editor.commit();
+        }
+
 
         navigationView = findViewById(R.id.bottom_nav);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -189,4 +228,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

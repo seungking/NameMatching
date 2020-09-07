@@ -23,6 +23,8 @@
         android:src="@drawable/ic_crown"/>
 
         <ImageView
+            android:id="@+id/rank_refresh"
+            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,30 +55,30 @@
         android:layout_weight="1"/>
 
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/rank_list"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_margin="15dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="7"/>-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rank_list"
         android:layout_width="match_parent"
         android:layout_margin="15dp"
         android:layout_height="0dp"
-        android:layout_weight="7">
+        android:layout_weight="7"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="20dp"
-            android:text="업데이트 준비 중 입니다"
-            android:fontFamily="@font/g_medium"/>
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="7">-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="업데이트 준비 중 입니다"-->
+<!--            android:fontFamily="@font/g_medium"/>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 </LinearLayout>

@@ -20,9 +20,8 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-
                 android:layout_weight="0.2"
-                android:id="@+id/rankuser_flag"
+                android:id="@+id/rankuser_photo"
                 android:src="@drawable/ic_baseline_settings_24"/>
 
             <LinearLayout

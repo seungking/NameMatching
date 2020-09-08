@@ -13,7 +13,7 @@ public class GameData {
         this.stage = 0;
         this.score = 0;
         this.hp = 3;
-        this.show = 2;
+        this.show = 3;
         this.chance = 1;
         this.hp_chance = 1;
         this.show_change = 1;

@@ -76,6 +76,8 @@ public class PlayActivity extends AppCompatActivity {
     int sound_correct;
     int sound_wrong;
     int sound_next;
+    int sound_start;
+    int sound_end;
     int waitLimit = 1000;
     int waitCounter = 0;
     int throttle = 10;
@@ -243,6 +245,8 @@ public class PlayActivity extends AppCompatActivity {
         sound_correct = soundPool_play.load(this,R.raw.correct_bgm,2);	//작성, (mp3 파일 이름이 click_sound이다.)
         sound_wrong = soundPool_play.load(this,R.raw.wrong_bgm,3);	//작성, (mp3 파일 이름이 click_sound이다.)
         sound_next = soundPool_play.load(this,R.raw.wrong_bgm,4);	//작성, (mp3 파일 이름이 click_sound이다.)
+        sound_start = soundPool_play.load(this,R.raw.play_start_bgm,5);	//작성, (mp3 파일 이름이 click_sound이다.)
+        sound_end = soundPool_play.load(this,R.raw.play_end_bgm,5);	//작성, (mp3 파일 이름이 click_sound이다.)
 
         //db
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -258,7 +262,7 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         //설명 다이얼로그
-        mAnimationDialog.create("버튼을 눌러 문제를 확인하세요","빠르게 지나갑니다","시작");
+        mAnimationDialog.create("파란 버튼을 눌러 문제를 확인하세요","빠르게 지나갑니다","시작");
         mAnimationDialog.set_image(getResources().getIdentifier("@drawable/play_button_img", "drawable", this.getPackageName()));
         mAnimationDialog.show();
 
@@ -403,6 +407,10 @@ public class PlayActivity extends AppCompatActivity {
                 wrong(w_res, curset.getAnswerString());
             }
         });
+
+        while(soundPool_play.play(sound_start,1,1,0,0,1) == 0 && waitCounter < waitLimit){
+            waitCounter++; SystemClock.sleep(throttle);
+        }
     }
 
     public void setnext(){
@@ -487,7 +495,7 @@ public class PlayActivity extends AppCompatActivity {
         play_question.setText(curset.getQuestion());
         stage.setText("STAGE " + gameData.getStage());
         score.setText(" 점수 : " + gameData.getScore());
-        gameData.setShow(2);
+        gameData.setShow(3);
         show_count.setText(String.valueOf(gameData.getShow()));
         show.setClickable(true);
         
@@ -559,6 +567,7 @@ public class PlayActivity extends AppCompatActivity {
         buttons=mAnimationDialog.init(this,false);
         mAnimationDialog.create("점수 : " + gameData.getScore(),"순위를 업데이트 해주세요","확인");
         mAnimationDialog.set_image(getResources().getDrawable(R.drawable.gameover));
+//        mAnimationDialog.setCanceledOnTouchOutside(false);
 //        AnimationDialog.set_parent_background("#7171ff");
         buttons[0].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -576,6 +585,9 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         mAnimationDialog.show();
+        while(soundPool_play.play(sound_end,1,1,0,0,1) == 0 && waitCounter < waitLimit){
+            waitCounter++; SystemClock.sleep(throttle);
+        }
     }
 
 }

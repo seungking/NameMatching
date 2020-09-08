@@ -81,6 +81,7 @@ public class SetAccount extends AppCompatActivity {
         txtSelectPhoto = findViewById(R.id.txtSelectPhoto);
         btnContinue = findViewById(R.id.btnContinue);
         circleImageView = findViewById(R.id.imgUserInfo);
+        circleImageView.setImageResource(R.drawable.defalut_photo);
 
         if(userPref.getString("photo","").length()>1){
             circleImageView.setImageBitmap(new functions().StringToBitmap(userPref.getString("photo","")));
@@ -114,7 +115,11 @@ public class SetAccount extends AppCompatActivity {
 
     private void saveUserInfo(){
         SharedPreferences.Editor editor = userPref.edit();
-        if(bitmap!=null)editor.putString("photo",new functions().bitmapToString(bitmap));
+        if(bitmap==null)
+            bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.defalut_photo);
+        Bitmap resizedBmp = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth()*0.4), (int) (bitmap.getHeight()*0.4), true);
+        editor.putString("photo",new functions().bitmapToString(resizedBmp));
+
         editor.putString("name",txtName.getText().toString().trim());
         editor.apply();
         if(getIntent().getIntExtra("from",0)==0){

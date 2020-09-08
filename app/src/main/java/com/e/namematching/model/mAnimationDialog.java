@@ -38,6 +38,7 @@ public class mAnimationDialog {
         context_full=context;
         inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         dialog = new Dialog(context);
+        dialog.setCanceledOnTouchOutside(true);
         if (isGrideViewButton){
             v = inflater.inflate(R.layout.animation_dialog_gride_b, null);
         }else {

@@ -1,5 +1,6 @@
 package com.e.namematching.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.media.Image;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apkfuns.xprogressdialog.XProgressDialog;
 import com.e.namematching.R;
 import com.e.namematching.adapter.RankAdapter;
 import com.e.namematching.model.RankUser;
@@ -71,6 +73,7 @@ public class RankFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("MissingPermission")
     public void init() {
 
         mFirebaseDatase = FirebaseDatabase.getInstance();
@@ -91,6 +94,7 @@ public class RankFragment extends Fragment {
     }
 
     public void setdata(){
+        XProgressDialog dialog = new XProgressDialog(getContext(), "Loading..", XProgressDialog.THEME_HORIZONTAL_SPOT);
         dialog.show();
 
         Handler handler = new Handler();
@@ -98,6 +102,7 @@ public class RankFragment extends Fragment {
             @Override
             public void run() {
                 dialog.dismiss();
+
             }
         },2000);
 

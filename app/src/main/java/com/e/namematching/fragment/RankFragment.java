@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,12 +45,16 @@ public class RankFragment extends Fragment {
     View view;
     RecyclerView recyclerView;
     ArrayList<RankUser> arrayList = new ArrayList<>();
+    ArrayList<RankUser> arrayList2 = new ArrayList<>();
     RankAdapter adapter;
 
+    TextView reset;
+    TextView cur_rank;
     ImageView refresh;
 
     private FirebaseDatabase mFirebaseDatase;
     private DatabaseReference mUser;
+    private DatabaseReference mReset;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     private ProgressDialog dialog;
@@ -78,11 +83,15 @@ public class RankFragment extends Fragment {
 
         mFirebaseDatase = FirebaseDatabase.getInstance();
         mUser = mFirebaseDatase.getReference("list");
+        mReset = mFirebaseDatase.getReference("reset");
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
         recyclerView = view.findViewById(R.id.rank_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        reset = view.findViewById(R.id.rank_remaining_time);
+        cur_rank = view.findViewById(R.id.rank_current_rank);
 
         dialog = new ProgressDialog(getContext());
         dialog.setCancelable(false);
@@ -104,27 +113,38 @@ public class RankFragment extends Fragment {
                 dialog.dismiss();
 
             }
-        },2000);
+        },2300);
 
         ArrayList<String> ids = new ArrayList<>();
-        int rank=0;
+        final int[] rank = {0};
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayList.clear();
+                arrayList2.clear();
                 Iterator<DataSnapshot> memberIterator = dataSnapshot.getChildren().iterator();
-
+                int cur_score = pref.getInt("score",0);
+                int onetime=1;
+                int count=0;
                 while( memberIterator.hasNext()) {
                     RankUser user = memberIterator.next().getValue(RankUser.class);
 
+                    if(count<=50) arrayList2.add(0,user);
                     arrayList.add(0,user);
-                    Log.d("log1", "ids : " + memberIterator.toString());
+                    if(user.getScore()==cur_score && onetime==1) {
+                        rank[0] = arrayList.size();
+                        onetime=0;
+                    }
+                    count++;
+
                 }
 
-                editor.putInt("rank",arrayList.indexOf(rank)+1);
+                HomeFragment.getInstance().home_rank.setText(String.valueOf(arrayList.size()-rank[0]+1) + "위");
+                cur_rank.setText("현재 순위 : " + String.valueOf(arrayList.size()-rank[0]+1) + "위");
+                editor.putInt("rank",arrayList.size()-rank[0]+1);
                 editor.commit();
-                adapter = new RankAdapter(getContext(),arrayList);
+                adapter = new RankAdapter(getContext(),arrayList2);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -135,5 +155,18 @@ public class RankFragment extends Fragment {
             }
         };
         mUser.orderByChild("score").addValueEventListener(postListener);
+
+        mReset.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                reset.setText(snapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

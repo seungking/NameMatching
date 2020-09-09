@@ -33,6 +33,12 @@
                 android:weightSum="1"
                 android:orientation="horizontal">
 
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:layout_weight="0.7">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -42,7 +48,13 @@
                     android:textColor="#000000"
                     android:textStyle="bold"
                     android:text="Habib Mhamadi"/>
-
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:layout_weight="0.3">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,7 +63,7 @@
                     android:id="@+id/rankuser_score"
                     android:textColor="#000000"
                     android:text="Jun 13"/>
-
+                </RelativeLayout>
 
             </LinearLayout>
 

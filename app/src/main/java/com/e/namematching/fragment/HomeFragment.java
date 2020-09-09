@@ -40,6 +40,8 @@ import stream.custombutton.CustomButton;
 
 public class HomeFragment extends Fragment {
 
+    private static HomeFragment instance = null;
+
     private View view;
     private CustomButton play;
     private String account_name="";
@@ -61,7 +63,12 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.layout_home,container,false);
         ButterKnife.bind(this,view);
         init();
+        instance = this;
         return view;
+    }
+
+    public static HomeFragment getInstance() {
+        return instance;
     }
 
     private void init(){
@@ -81,8 +88,8 @@ public class HomeFragment extends Fragment {
         score = sharedPreferences.getInt("score",0);
         rank = sharedPreferences.getInt("rank",0);
 
-        home_rank.setText(String.valueOf(rank));
-        home_score.setText(String.valueOf(score));
+//        home_rank.setText(String.valueOf(rank));
+        home_score.setText(String.valueOf(score) + "점");
 
     }
 }

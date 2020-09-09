@@ -48,20 +48,33 @@
         android:id="@+id/rank_remaining_time"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="랭크 초기화 시간 : "
+        android:text=""
         android:gravity="center"
         android:textSize="20dp"
         android:fontFamily="@font/g_bold"
-        android:layout_weight="1"/>
+        android:layout_weight="0.6"/>
 
+    <TextView
+        android:id="@+id/rank_current_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text=""
+        android:gravity="center"
+        android:textSize="15dp"
+        android:fontFamily="@font/g_medium"
+        android:layout_weight="0.6"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rank_list"
         android:layout_width="match_parent"
         android:layout_margin="15dp"
         android:layout_height="0dp"
-        android:layout_weight="7"/>
+        android:layout_weight="5.1"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.7"/>
 <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_margin="15dp"-->

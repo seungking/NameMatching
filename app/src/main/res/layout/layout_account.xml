@@ -65,68 +65,70 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal">-->
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="0"
-                    android:id="@+id/account_score"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="0"-->
+<!--                    android:id="@+id/account_score"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textStyle="bold" />-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="최고 점수" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:text="최고 점수" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="0"
-                    android:id="@+id/account_rank"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="0"-->
+<!--                    android:id="@+id/account_rank"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textStyle="bold" />-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="최고 순위" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:text="현재 순위" />-->
 
-            </LinearLayout>
-        </LinearLayout>
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
-            android:layout_margin="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:orientation="vertical">
 
             <LinearLayout

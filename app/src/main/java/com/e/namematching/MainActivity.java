@@ -106,28 +106,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mUser = mFirebaseDatase.getReference("list").child("aaa");
 
-//        ValueEventListener postListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // Get Post object and use the values to update the UI
-//                editor.putInt("score", dataSnapshot.getValue(Integer.class));
-//                editor.commit();
-//                // ...
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                // Getting Post failed, log a message
-//                // ...
-//            }
-//        };
-//        mUser.child("name").addValueEventListener(postListener);
-
-
-        Log.d("log1","main resume music start");
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);	//작성
         soundID = soundPool.load(this,R.raw.bgm_ha0,1);	//작성, (mp3 파일 이름이 click_sound이다.)
-//        soundPool.play(soundID,1,1,0,1,1);	//작성
 
         int waitLimit = 1000;
         int waitCounter = 0;

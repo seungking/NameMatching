@@ -167,13 +167,13 @@ public class PlayActivity extends AppCompatActivity {
 
         //전면광고
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-1992325656759505/5558954060");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
         //
 
         //리워드 광고
         rewardedAd = new RewardedAd(this,
-                "ca-app-pub-3940256099942544/5224354917");
+                "ca-app-pub-1992325656759505/2809695318");
         RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {
@@ -297,7 +297,7 @@ public class PlayActivity extends AppCompatActivity {
                     window1.setVisibility(View.INVISIBLE);
                     window2.setVisibility(View.INVISIBLE);
                 }
-            },20);
+            },30);
             gameData.setShow(gameData.getShow()-1);
             show_count.setText(String.valueOf(gameData.getShow()));
             if(gameData.getShow()<=0) {
@@ -332,7 +332,7 @@ public class PlayActivity extends AppCompatActivity {
                             @Override
                             public void onRewardedAdClosed() {
                                 // Ad closed.
-                                Toasty.info(PlayActivity.this, "리워드 지급에 실패하였습니다.", Toast.LENGTH_SHORT, true).show();
+                                loadRewardedVideoAd();
                                 AnimationDialog.close();
                             }
 
@@ -344,6 +344,7 @@ public class PlayActivity extends AppCompatActivity {
                                 gameData.setShow(3 + gameData.getShow());
                                 show.setClickable(true);
                                 show_count.setText(String.valueOf(gameData.getShow()));
+                                Toasty.success(PlayActivity.this, "기회가 3회 추가되었습니다.", Toast.LENGTH_SHORT, true).show();
                                 AnimationDialog.close();
                             }
 
@@ -424,6 +425,7 @@ public class PlayActivity extends AppCompatActivity {
                 buttons = AnimationDialog.init(this, false);
                 AnimationDialog.create("생명이 없습니다.\n 생명을 1 추가하시겠습니까?", "남은 기회 : 1번", "Not Ok!");
                 AnimationDialog.add_secend_button("OK!");
+                AnimationDialog.setCanceledOnTouchOutside(false);
                 buttons[0].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -447,8 +449,7 @@ public class PlayActivity extends AppCompatActivity {
                                 @Override
                                 public void onRewardedAdClosed() {
                                     // Ad closed.
-                                    finsh_button();
-                                    Toasty.info(PlayActivity.this, "리워드 지급에 실패하였습니다.", Toast.LENGTH_SHORT, true).show();
+                                    loadRewardedVideoAd();
                                     AnimationDialog.close();
                                 }
 
@@ -457,6 +458,7 @@ public class PlayActivity extends AppCompatActivity {
                                     gameData.setHp_chance(0);
                                     gameData.setHp(1);
                                     hp1.setImageResource(R.drawable.hearticon);
+                                    Toasty.success(PlayActivity.this, "목슴이 추가되었습니다.", Toast.LENGTH_SHORT, true).show();
                                     AnimationDialog.close();
                                 }
 
@@ -481,11 +483,10 @@ public class PlayActivity extends AppCompatActivity {
             }
         }
 
-//        idx++;
-        idx = (int)(Math.random()*setlist.size()-1);
+        idx = (int) (Math.random() * setlist.size() - 1);
         curset = setlist.get(idx);
         w_res = imglist.get(idx);
-        gameData.setStage(gameData.getStage()+1);
+        gameData.setStage(gameData.getStage() + 1);
         window1.setResourceId(imglist.get((idx)));
         window2.setResourceId(imglist.get((idx)));
         option1.setText(curset.geto1());
@@ -498,7 +499,8 @@ public class PlayActivity extends AppCompatActivity {
         gameData.setShow(3);
         show_count.setText(String.valueOf(gameData.getShow()));
         show.setClickable(true);
-        
+
+
     }
 
     public void exitnotification() {
@@ -566,6 +568,7 @@ public class PlayActivity extends AppCompatActivity {
         Button[] buttons;
         buttons=mAnimationDialog.init(this,false);
         mAnimationDialog.create("점수 : " + gameData.getScore(),"순위를 업데이트 해주세요","확인");
+        mAnimationDialog.setCanceledOnTouchOutside(false);
         mAnimationDialog.set_image(getResources().getDrawable(R.drawable.gameover));
 //        mAnimationDialog.setCanceledOnTouchOutside(false);
 //        AnimationDialog.set_parent_background("#7171ff");

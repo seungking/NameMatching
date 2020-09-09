@@ -60,10 +60,10 @@ public class AccountFragment extends Fragment {
     CircleImageView imgProfile;
     @BindView(R.id.account_name)
     TextView name;
-    @BindView(R.id.account_score)
-    TextView score;
-    @BindView(R.id.account_rank)
-    TextView rank;
+//    @BindView(R.id.account_score)
+//    TextView score;
+//    @BindView(R.id.account_rank)
+//    TextView rank;
     @BindView(R.id.setting_edit_account)
     LinearLayout editaccount;
     @BindView(R.id.setting_sound)
@@ -168,8 +168,8 @@ public class AccountFragment extends Fragment {
         imgProfile.setImageBitmap(new functions().StringToBitmap(preferences.getString("photo","")));
         name.setText(preferences.getString("name", "WELLCOME!"));
 
-        score.setText(String.valueOf(preferences.getInt("score",0)));
-        rank.setText(String.valueOf(preferences.getInt("rank",0)));
+//        score.setText(String.valueOf(preferences.getInt("score",0)) + "점");
+//        rank.setText(String.valueOf(preferences.getInt("rank",0)) + "위");
     }
 
     @Override

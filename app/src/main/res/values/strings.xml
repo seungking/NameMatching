@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">1초 퀴즈</string>
+    <string name="app_name">1 Second Quiz</string>
     <string name="addmob_id">ca-app-pub-1992325656759505~9211452133</string>
     <string name="addmob_ingame_banner">ca-app-pub-1992325656759505/7063607422</string>
     <string name="addmob_chance_reward">ca-app-pub-1992325656759505/2809695318</string>
     <string name="addmob_foward">ca-app-pub-1992325656759505/5558954060</string>
 
-    <string name="app_name_kor">1초 퀴즈</string>
+<!--    <string name="app_name_kor">1초 퀴즈</string>-->
 </resources>

@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
         rank = sharedPreferences.getInt("rank",0);
 
 //        home_rank.setText(String.valueOf(rank));
-        home_score.setText(String.valueOf(score) + "점");
+        home_score.setText(String.valueOf(score));
 
     }
 }

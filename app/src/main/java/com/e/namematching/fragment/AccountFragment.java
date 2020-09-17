@@ -122,7 +122,7 @@ public class AccountFragment extends Fragment {
                 editor.putInt("sound", 0);
                 sound.setBackground(getResources().getDrawable(R.drawable.corners_setting_off));
                 sound_img.setImageResource(R.drawable.ic_baseline_volume_off_24);
-                sound_txt.setText("소리 OFF");
+                sound_txt.setText("Sound OFF");
 
                 if(in_account_sound==0)
                     ((MainActivity)getActivity()).soundPool.stop(((MainActivity)getActivity()).soundID);
@@ -139,7 +139,7 @@ public class AccountFragment extends Fragment {
                 editor.putInt("sound", 1);
                 sound.setBackground(getResources().getDrawable(R.drawable.corners_setting));
                 sound_img.setImageResource(R.drawable.ic_baseline_volume_up_24);
-                sound_txt.setText("소리 ON");
+                sound_txt.setText("Sound ON");
 
                 while(soundPool.play(soundID,1,1,0,-1,1) == 0 && waitCounter < waitLimit){
                     waitCounter++; SystemClock.sleep(throttle);
@@ -156,7 +156,7 @@ public class AccountFragment extends Fragment {
             email.setType("plain/text");
             String[] address = {"ahnseungkl@gmail.com"};
             email.putExtra(Intent.EXTRA_EMAIL, address);
-            email.putExtra(Intent.EXTRA_SUBJECT, "[FROM 1초 퀴즈 앱]");
+            email.putExtra(Intent.EXTRA_SUBJECT, "[FROM 1 Secound Quiz]");
             startActivity(email);
         });
 

@@ -169,7 +169,7 @@
                 android:fontFamily="@font/g_bold"
                 android:textColor="@color/textColor"
                 android:textSize="20dp"
-                android:text="최고 점수" />
+                android:text="Score" />
 
         </LinearLayout>
 
@@ -199,7 +199,7 @@
                 android:fontFamily="@font/g_bold"
                 android:textColor="@color/textColor"
                 android:textStyle="bold"
-                android:text="최고 순위" />
+                android:text="Rank" />
 
         </LinearLayout>
     </LinearLayout>

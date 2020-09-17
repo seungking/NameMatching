@@ -262,7 +262,7 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         //설명 다이얼로그
-        mAnimationDialog.create("파란 버튼을 눌러 문제를 확인하세요","빠르게 지나갑니다","시작");
+        mAnimationDialog.create("Press the blue button","It's going fast!","Start");
         mAnimationDialog.set_image(getResources().getIdentifier("@drawable/play_button_img", "drawable", this.getPackageName()));
         mAnimationDialog.show();
 
@@ -308,7 +308,7 @@ public class PlayActivity extends AppCompatActivity {
         telescope_plus.setOnClickListener(v->{
             Button[] buttons;
             buttons=AnimationDialog.init(this,false);
-            AnimationDialog.create("3회 보기를 추가하시겠습니까?","남은 기회 : 1번","Not Ok!");
+            AnimationDialog.create("Do you want to add three views?","Opportunity Remaining : 1","Not Ok!");
             AnimationDialog.add_secend_button("OK!");
             buttons[0].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -344,14 +344,14 @@ public class PlayActivity extends AppCompatActivity {
                                 gameData.setShow(3 + gameData.getShow());
                                 show.setClickable(true);
                                 show_count.setText(String.valueOf(gameData.getShow()));
-                                Toasty.success(PlayActivity.this, "기회가 3회 추가되었습니다.", Toast.LENGTH_SHORT, true).show();
+                                Toasty.success(PlayActivity.this, "Three more opportunities have been added.", Toast.LENGTH_SHORT, true).show();
                                 AnimationDialog.close();
                             }
 
                             @Override
                             public void onRewardedAdFailedToShow(AdError adError) {
                                 // Ad failed to display.
-                                Toasty.info(PlayActivity.this, "리워드 지급에 실패하였습니다.", Toast.LENGTH_SHORT, true).show();
+                                Toasty.info(PlayActivity.this, "Reward payment failed.", Toast.LENGTH_SHORT, true).show();
                                 AnimationDialog.close();
                             }
                         };
@@ -423,7 +423,7 @@ public class PlayActivity extends AppCompatActivity {
             if(gameData.getHp_chance()==1) {
                 Button[] buttons;
                 buttons = AnimationDialog.init(this, false);
-                AnimationDialog.create("생명이 없습니다.\n 생명을 1 추가하시겠습니까?", "남은 기회 : 1번", "Not Ok!");
+                AnimationDialog.create("No life\n add one more life?", "Opportunity Remaining : 1", "Not Ok!");
                 AnimationDialog.add_secend_button("OK!");
                 AnimationDialog.setCanceledOnTouchOutside(false);
                 buttons[0].setOnClickListener(new View.OnClickListener() {
@@ -458,7 +458,7 @@ public class PlayActivity extends AppCompatActivity {
                                     gameData.setHp_chance(0);
                                     gameData.setHp(1);
                                     hp1.setImageResource(R.drawable.hearticon);
-                                    Toasty.success(PlayActivity.this, "목슴이 추가되었습니다.", Toast.LENGTH_SHORT, true).show();
+                                    Toasty.success(PlayActivity.this, "Life has been added.", Toast.LENGTH_SHORT, true).show();
                                     AnimationDialog.close();
                                 }
 
@@ -466,7 +466,7 @@ public class PlayActivity extends AppCompatActivity {
                                 public void onRewardedAdFailedToShow(AdError adError) {
                                     // Ad failed to display.
                                     finsh_button();
-                                    Toasty.info(PlayActivity.this, "리워드 지급에 실패하였습니다.", Toast.LENGTH_SHORT, true).show();
+                                    Toasty.info(PlayActivity.this, "Reward payment failed.", Toast.LENGTH_SHORT, true).show();
                                     AnimationDialog.close();
                                 }
                             };
@@ -494,8 +494,8 @@ public class PlayActivity extends AppCompatActivity {
         option3.setText(curset.geto3());
         option4.setText(curset.geto4());
         play_question.setText(curset.getQuestion());
-        stage.setText("STAGE " + gameData.getStage());
-        score.setText(" 점수 : " + gameData.getScore());
+        stage.setText("Stage " + gameData.getStage());
+        score.setText(" Score : " + gameData.getScore());
         gameData.setShow(3);
         show_count.setText(String.valueOf(gameData.getShow()));
         show.setClickable(true);
@@ -506,7 +506,7 @@ public class PlayActivity extends AppCompatActivity {
     public void exitnotification() {
         Button[] buttons;
         buttons=AnimationDialog.init(this,false);
-        AnimationDialog.create("종료하시겠습니까?","점수는 저장되지 않습니다.","Not Ok!");
+        AnimationDialog.create("Do you want to exit?","Scores are not saved.","Not Ok!");
         AnimationDialog.add_secend_button("OK!");
         buttons[0].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -535,7 +535,7 @@ public class PlayActivity extends AppCompatActivity {
         setlist.remove(idx);
         imglist.remove(idx);
         if(setlist.size()>0)setnext();
-        mAnimationDialog.create("정답입니다!","정답 : " + answer,"다음");
+        mAnimationDialog.create("That's correct!!","Answer : " + answer,"Next");
         mAnimationDialog.set_image(res);
         mAnimationDialog.show();
     }
@@ -550,7 +550,7 @@ public class PlayActivity extends AppCompatActivity {
         setlist.remove(idx);
         imglist.remove(idx);
         if(setlist.size()>0)setnext();
-        mAnimationDialog.create("틀렸습니다.","정답 : " + answer,"다음");
+        mAnimationDialog.create("Incorrect!","Answer : " + answer,"Next");
         mAnimationDialog.set_image(res);
         mAnimationDialog.show();
     }
@@ -567,7 +567,7 @@ public class PlayActivity extends AppCompatActivity {
 
         Button[] buttons;
         buttons=mAnimationDialog.init(this,false);
-        mAnimationDialog.create("점수 : " + gameData.getScore(),"순위를 업데이트 해주세요","확인");
+        mAnimationDialog.create("Score : " + gameData.getScore(),"Please update the ranking.","OK");
         mAnimationDialog.setCanceledOnTouchOutside(false);
         mAnimationDialog.set_image(getResources().getDrawable(R.drawable.gameover));
 //        mAnimationDialog.setCanceledOnTouchOutside(false);

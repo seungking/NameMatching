@@ -16,7 +16,7 @@
         android:fontFamily="@font/g_bold"
         android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
-        android:text="정보를 입력해주세요"/>
+        android:text="User information"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         android:fontFamily="@font/g_medium"
         android:layout_marginBottom="30dp"
         android:gravity="center_horizontal"
-        android:text="랭킹 등록에 사용됩니다"/>
+        android:text="Used for ranking"/>
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/g_medium"
-        android:text="사진 가져오기"
+        android:text="Select photo"
         android:textColor="#2196f1"
         android:gravity="center_horizontal"
         android:id="@+id/txtSelectPhoto"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/g_bold"
             android:id="@+id/txtNameUserInfo"
-            android:hint="이름"
+            android:hint="Name"
             android:inputType="text"
             android:textSize="15sp"/>
 

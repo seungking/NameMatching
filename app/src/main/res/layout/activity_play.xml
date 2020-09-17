@@ -74,7 +74,7 @@
             android:textSize="20dp"
             android:layout_weight="0.2"
             android:textAllCaps="false"
-            android:text=" 점수 : "/>
+            android:text=" Score : "/>
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -226,10 +226,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:text="구름은 몇 개 일까요?"
+        android:text=""
         android:fontFamily="@font/g_bold"
         android:textColor="@color/textColor"
-        android:textSize="23dp"
+        android:textSize="18dp"
         android:layout_margin="3dp"
         android:gravity="center"/>
 

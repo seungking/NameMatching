@@ -140,8 +140,8 @@ public class RankFragment extends Fragment {
 
                 }
 
-                HomeFragment.getInstance().home_rank.setText(String.valueOf(arrayList.size()-rank[0]+1) + "위");
-                cur_rank.setText("현재 순위 : " + String.valueOf(arrayList.size()-rank[0]+1) + "위");
+                HomeFragment.getInstance().home_rank.setText(String.valueOf(arrayList.size()-rank[0]+1));
+                cur_rank.setText("Rank : " + String.valueOf(arrayList.size()-rank[0]+1));
                 editor.putInt("rank",arrayList.size()-rank[0]+1);
                 editor.commit();
                 adapter = new RankAdapter(getContext(),arrayList2);

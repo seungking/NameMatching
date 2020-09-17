@@ -106,7 +106,7 @@ public class SetAccount extends AppCompatActivity {
     private boolean validate(){
         if (txtName.getText().toString().isEmpty()){
             layoutName.setErrorEnabled(true);
-            layoutName.setError("사용할 이름을 입력해 주세요");
+            layoutName.setError("Please enter the name");
             return false;
         }
         return true;

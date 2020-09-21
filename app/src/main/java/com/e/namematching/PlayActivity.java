@@ -136,8 +136,11 @@ public class PlayActivity extends AppCompatActivity {
 
     private AdView mAdView;
     private RewardedAd rewardedAd;
+    private RewardedAd rewardedAd2;
     private RewardedVideoAd mRewardedVideoAd;
     private InterstitialAd mInterstitialAd;
+    RewardedAdLoadCallback adLoadCallback;
+    RewardedAdLoadCallback adLoadCallback2;
 
     //database
     private FirebaseDatabase mFirebaseDatase;
@@ -174,7 +177,7 @@ public class PlayActivity extends AppCompatActivity {
         //리워드 광고
         rewardedAd = new RewardedAd(this,
                 "ca-app-pub-1992325656759505/2809695318");
-        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+        adLoadCallback = new RewardedAdLoadCallback() {
             @Override
             public void onRewardedAdLoaded() {
                 // Ad successfully loaded.
@@ -188,6 +191,22 @@ public class PlayActivity extends AppCompatActivity {
         rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
         //
 
+        //리워드 광고
+        rewardedAd2 = new RewardedAd(this,
+                "ca-app-pub-1992325656759505/2809695318");
+        adLoadCallback2 = new RewardedAdLoadCallback() {
+            @Override
+            public void onRewardedAdLoaded() {
+                // Ad successfully loaded.
+            }
+
+            @Override
+            public void onRewardedAdFailedToLoad(LoadAdError adError) {
+                // Ad failed to load.
+            }
+        };
+        rewardedAd2.loadAd(new AdRequest.Builder().build(), adLoadCallback2);
+        //
 
         initdata();
         init();
@@ -196,16 +215,6 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (!mRewardedVideoAd.isLoaded()) {
-            Log.d("log1", "loadrewardvideoad restart");
-            loadRewardedVideoAd();
-        }
-    }
-
-    private void loadRewardedVideoAd() {
-        Log.d("log1", "loadrewardvideoad");
-        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",
-                new AdRequest.Builder().build());
     }
 
     public void initdata(){
@@ -320,7 +329,8 @@ public class PlayActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Log.d("log1", "ok");
-                    if (rewardedAd.isLoaded()) {
+                    if (rewardedAd2.isLoaded()) {
+                        rewardedAd2.loadAd(new AdRequest.Builder().build(), adLoadCallback2);
                         Activity activityContext = PlayActivity.this;
                         RewardedAdCallback adCallback = new RewardedAdCallback() {
                             @Override
@@ -332,7 +342,6 @@ public class PlayActivity extends AppCompatActivity {
                             @Override
                             public void onRewardedAdClosed() {
                                 // Ad closed.
-                                loadRewardedVideoAd();
                                 AnimationDialog.close();
                             }
 
@@ -355,7 +364,7 @@ public class PlayActivity extends AppCompatActivity {
                                 AnimationDialog.close();
                             }
                         };
-                        rewardedAd.show(activityContext, adCallback);
+                        rewardedAd2.show(activityContext, adCallback);
                     } else {
                         Log.d("TAG", "The rewarded ad wasn't loaded yet.");
                     }
@@ -438,6 +447,7 @@ public class PlayActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         Log.d("log1", "ok");
                         if (rewardedAd.isLoaded()) {
+                            rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
                             Activity activityContext = PlayActivity.this;
                             RewardedAdCallback adCallback = new RewardedAdCallback() {
                                 @Override
@@ -449,7 +459,6 @@ public class PlayActivity extends AppCompatActivity {
                                 @Override
                                 public void onRewardedAdClosed() {
                                     // Ad closed.
-                                    loadRewardedVideoAd();
                                     AnimationDialog.close();
                                 }
 
@@ -489,6 +498,14 @@ public class PlayActivity extends AppCompatActivity {
         gameData.setStage(gameData.getStage() + 1);
         window1.setResourceId(imglist.get((idx)));
         window2.setResourceId(imglist.get((idx)));
+        if(curset.geto1().length()>13)option1.setTextSize(13);
+        else option1.setTextSize(18);
+        if(curset.geto2().length()>13)option2.setTextSize(13);
+        else option2.setTextSize(18);
+        if(curset.geto3().length()>13)option3.setTextSize(13);
+        else option3.setTextSize(18);
+        if(curset.geto4().length()>13)option4.setTextSize(13);
+        else option4.setTextSize(18);
         option1.setText(curset.geto1());
         option2.setText(curset.geto2());
         option3.setText(curset.geto3());
@@ -575,7 +592,6 @@ public class PlayActivity extends AppCompatActivity {
         buttons[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 if (mInterstitialAd.isLoaded()) {
                     mInterstitialAd.show();

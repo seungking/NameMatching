@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         //
 
+        FirebaseDatabase.getInstance();
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frameHomeContainer,new HomeFragment(), HomeFragment.class.getSimpleName()).commit();
         init();

@@ -1,5 +1,6 @@
 package com.e.namematching.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +34,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.Constants;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.e.namematching.BuildConfig;
 import com.e.namematching.MainActivity;
 import com.e.namematching.R;
@@ -50,8 +55,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 
-public class AccountFragment extends Fragment {
+public class AccountFragment extends Fragment implements BillingProcessor.IBillingHandler{
 
     private View view;
 
@@ -76,6 +82,8 @@ public class AccountFragment extends Fragment {
     ImageView sound_img;
     @BindView(R.id.setting_sound_text)
     TextView sound_txt;
+
+    private BillingProcessor bp;
 
     int soundcheck=1;
     int in_account_sound=0;
@@ -103,6 +111,8 @@ public class AccountFragment extends Fragment {
 
     private void init() {
 
+        bp = new BillingProcessor(getContext(), "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkH/6s6gO++pn+14KRtrxVwp67/uextdJAmFOVlDkYepJzq4uiM+4MPf+vO0RGyw00KCUlVPdi06rmwnA2QHrMYTXUdc6tqhET72tHePcCJu3CfhAyelb4fnwN84JCziTNZ58NWXPZkWUF0anDGB6ylLGl/ipMadvKq3KmoRUunE+WOPXeppTFk9xqHYT7D3bUt28prv6AP/1ywquEYyn87su2+6b9DWASSM89Hwx79NmEQHCtTBPk5W4LAcfShsJUcgZH7ZfozMcO4xKdKRpiWnNCOd68ZwZo1Ym5BhxdY9pizFDnKv9+Jw91jiOCCgUw8ODpArRouqDCNGpfX8sbwIDAQAB", this);
+
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);	//작성
         soundID = soundPool.load(getContext(),R.raw.bgm_ha0,1);	//작성, (mp3 파일 이름이 click_sound이다.)
 
@@ -115,6 +125,10 @@ public class AccountFragment extends Fragment {
             Intent intent = new Intent(getContext(), SetAccount.class);
             intent.putExtra("from",1);
             startActivity(intent);
+        });
+
+        donation.setOnClickListener(v->{
+            bp.purchase((Activity) getContext(), "donation");
         });
 
         sound.setOnClickListener(v->{
@@ -184,5 +198,29 @@ public class AccountFragment extends Fragment {
         soundPool.stop(soundID);
     }
 
+    @Override
+    public void onProductPurchased(@NonNull String productId, @Nullable TransactionDetails details) {
+        if (productId.equals("donation")) {
+            // TODO: 구매 해 주셔서 감사합니다! 메세지 보내기
+            bp.isPurchased("donation");
+            Toasty.success(getContext(), "Thank you!", Toast.LENGTH_SHORT, true).show();
+            bp.consumePurchase("donation");
+        }
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+    }
+
+    @Override
+    public void onBillingError(int errorCode, @Nullable Throwable error) {
+        if (errorCode != Constants.BILLING_RESPONSE_RESULT_USER_CANCELED) {
+            Toasty.info(getContext(), "Billing Error.", Toast.LENGTH_SHORT, true).show();
+        }
+    }
+
+    @Override
+    public void onBillingInitialized() {
+    }
 
 }

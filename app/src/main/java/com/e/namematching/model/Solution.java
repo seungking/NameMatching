@@ -134,7 +134,7 @@ public class Solution {
             new Set("What's the name of this?", 1, "mirror", "Pond", "tube", "Ring"),
             new Set("What's the name of this?", 4, "Scissors", "robe", "Fall", "mirror"),
             new Set("What's the name of this?", 3, "glove", "Apple", "chili", "paprika"),
-            new Set("What's the name of this?", 2, "mixxer", "mixer", "mixar", "mlxer"),
+            new Set("What's the name of this?", 2, "Scissors", "mixer", "blade", "mirror"),
             new Set("What's the name of this?", 1, "mixer", "sewing machine", "boiler", "coffee maker"),
             new Set("What's the name of this?", 4, "bear", "dog", "Person", "monkey"),
             new Set("What's the name of this?", 3, "Squirrel", "guinea pig", "rat", "cat"),
@@ -205,8 +205,8 @@ public class Solution {
             new Set("What's the name of this?", 1, "Toast machine", "car", "Banner", "fridge"),
             new Set("What's the name of this?", 4, "Urine machine", "bathtub", "bidet", "toilet"),
             new Set("What's the name of this?", 3, "toilet-paper", "towel", "toilet-paper & toilet-paper hanger", "towel & towel hanger"),
-            new Set("What's the name of this?", 2, "Toethbrush", "Toothbrush", "Teothbrush", "Teethbrush"),
-            new Set("What's the name of this?", 1, "Toothpaste", "Toothpste", "Toothpast", "Tothpaste"),
+            new Set("What's the name of this?", 2, "spoon", "Toothbrush", "Kettle", "fridge"),
+            new Set("What's the name of this?", 1, "Toothpaste", "towel", "bowl", "bottle"),
             new Set("What's the name of this?", 4, "towel", "toilet-paper & toilet-paper hanger", "towel hanger", "towel & towel hanger"),
             new Set("What's the name of this?", 4, "horse", "giraffe", "Milk cow", "zebra")
 

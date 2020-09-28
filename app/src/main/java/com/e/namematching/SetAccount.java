@@ -43,9 +43,11 @@ public class SetAccount extends AppCompatActivity {
     private CircleImageView circleImageView;
     private static final int GALLERY_ADD_PROFILE = 1;
     private Bitmap bitmap = null;
+    private Bitmap bitmap2 = null;
     private SharedPreferences userPref;
     private ProgressDialog dialog;
     private String name;
+    private int a=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,19 @@ public class SetAccount extends AppCompatActivity {
                 saveUserInfo();
             }
         });
+
+        a = (int)(Math.random()*100)+1;
+        if(a%10==1) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.bear);
+        else if(a%10==2) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.chicken1);
+        else if(a%10==3) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.duck);
+        else if(a%10==4) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.eagle);
+        else if(a%10==5) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.owl);
+        else if(a%10==6) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.panda);
+        else if(a%10==7) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.penguin);
+        else if(a%10==8) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.pig);
+        else if(a%10==9) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.rabbit);
+        else if(a%10==0) bitmap2 = BitmapFactory.decodeResource(this.getResources(), R.drawable.zebra);
+        circleImageView.setImageBitmap(bitmap2);
     }
 
     private boolean validate(){
@@ -115,8 +130,9 @@ public class SetAccount extends AppCompatActivity {
 
     private void saveUserInfo(){
         SharedPreferences.Editor editor = userPref.edit();
-        if(bitmap==null)
-            bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.defalut_photo);
+        if(bitmap==null) {
+            bitmap = bitmap2;
+        }
         Bitmap resizedBmp = Bitmap.createScaledBitmap(bitmap, (int) (bitmap.getWidth()*0.4), (int) (bitmap.getHeight()*0.4), true);
         editor.putString("photo",new functions().bitmapToString(resizedBmp));
 

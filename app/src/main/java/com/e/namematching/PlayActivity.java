@@ -291,26 +291,30 @@ public class PlayActivity extends AppCompatActivity {
 
         //보이기
         show.setOnClickListener(v->{
-            if(soundcheck==1) {
-                while(soundPool_play.play(sound_show,1,1,0,0,1) == 0 && waitCounter < waitLimit){
-                    waitCounter++; SystemClock.sleep(throttle);
+            if (gameData.getHp() == 0) finsh_button();
+            else {
+                if (soundcheck == 1) {
+                    while (soundPool_play.play(sound_show, 1, 1, 0, 0, 1) == 0 && waitCounter < waitLimit) {
+                        waitCounter++;
+                        SystemClock.sleep(throttle);
+                    }
                 }
-            }
 
-            window1.setVisibility(View.VISIBLE);
-            window2.setVisibility(View.VISIBLE);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    window1.setVisibility(View.INVISIBLE);
-                    window2.setVisibility(View.INVISIBLE);
+                window1.setVisibility(View.VISIBLE);
+                window2.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        window1.setVisibility(View.INVISIBLE);
+                        window2.setVisibility(View.INVISIBLE);
+                    }
+                }, 30);
+                gameData.setShow(gameData.getShow() - 1);
+                show_count.setText(String.valueOf(gameData.getShow()));
+                if (gameData.getShow() <= 0) {
+                    show.setClickable(false);
                 }
-            },30);
-            gameData.setShow(gameData.getShow()-1);
-            show_count.setText(String.valueOf(gameData.getShow()));
-            if(gameData.getShow()<=0) {
-                show.setClickable(false);
             }
         });
 
@@ -377,44 +381,52 @@ public class PlayActivity extends AppCompatActivity {
             exitnotification();
         });
 
-        option1.setOnClickListener(v->{
-            if(curset.getAnswer()==1) {
-                gameData.setScore(gameData.getScore()+1);
-                correct(w_res, curset.getAnswerString());
-            }
-            else{
-                gameData.setHp(gameData.getHp()-1);
-                wrong(w_res, curset.getAnswerString());
+        option1.setOnClickListener(v-> {
+            if (gameData.getHp() == 0) finsh_button();
+            else {
+                if (curset.getAnswer() == 1) {
+                    gameData.setScore(gameData.getScore() + 1);
+                    correct(w_res, curset.getAnswerString());
+                } else {
+                    gameData.setHp(gameData.getHp() - 1);
+                    wrong(w_res, curset.getAnswerString());
+                }
             }
         });
         option2.setOnClickListener(v->{
-            if(curset.getAnswer()==2) {
-                gameData.setScore(gameData.getScore()+1);
-                correct(w_res, curset.getAnswerString());
-            }
-            else{
-                gameData.setHp(gameData.getHp()-1);
-                wrong(w_res, curset.getAnswerString());
+            if (gameData.getHp() == 0) finsh_button();
+            else {
+                if (curset.getAnswer() == 2) {
+                    gameData.setScore(gameData.getScore() + 1);
+                    correct(w_res, curset.getAnswerString());
+                } else {
+                    gameData.setHp(gameData.getHp() - 1);
+                    wrong(w_res, curset.getAnswerString());
+                }
             }
         });
         option3.setOnClickListener(v->{
-            if(curset.getAnswer()==3) {
-                gameData.setScore(gameData.getScore()+1);
-                correct(w_res, curset.getAnswerString());
-            }
-            else{
-                gameData.setHp(gameData.getHp()-1);
-                wrong(w_res, curset.getAnswerString());
+            if (gameData.getHp() == 0) finsh_button();
+            else {
+                if (curset.getAnswer() == 3) {
+                    gameData.setScore(gameData.getScore() + 1);
+                    correct(w_res, curset.getAnswerString());
+                } else {
+                    gameData.setHp(gameData.getHp() - 1);
+                    wrong(w_res, curset.getAnswerString());
+                }
             }
         });
         option4.setOnClickListener(v->{
-            if(curset.getAnswer()==4) {
-                gameData.setScore(gameData.getScore()+1);
-                correct(w_res, curset.getAnswerString());
-            }
-            else{
-                gameData.setHp(gameData.getHp()-1);
-                wrong(w_res, curset.getAnswerString());
+            if (gameData.getHp() == 0) finsh_button();
+            else {
+                if (curset.getAnswer() == 4) {
+                    gameData.setScore(gameData.getScore() + 1);
+                    correct(w_res, curset.getAnswerString());
+                } else {
+                    gameData.setHp(gameData.getHp() - 1);
+                    wrong(w_res, curset.getAnswerString());
+                }
             }
         });
 
@@ -513,7 +525,7 @@ public class PlayActivity extends AppCompatActivity {
         play_question.setText(curset.getQuestion());
         stage.setText("Stage " + gameData.getStage());
         score.setText(" Score : " + gameData.getScore());
-        gameData.setShow(3);
+        gameData.setShow(gameData.getShow() + 3);
         show_count.setText(String.valueOf(gameData.getShow()));
         show.setClickable(true);
 

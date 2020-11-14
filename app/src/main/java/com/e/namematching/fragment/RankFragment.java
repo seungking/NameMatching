@@ -123,26 +123,46 @@ public class RankFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayList.clear();
                 arrayList2.clear();
+
+                final ArrayList<RankUser> arrayList3 = new ArrayList<>();
+
                 Iterator<DataSnapshot> memberIterator = dataSnapshot.getChildren().iterator();
                 int cur_score = pref.getInt("score",0);
                 int onetime=1;
                 int count=0;
                 while( memberIterator.hasNext()) {
                     RankUser user = memberIterator.next().getValue(RankUser.class);
-
-                    if(count<=50) arrayList2.add(0,user);
-                    arrayList.add(0,user);
-                    if(user.getScore()==cur_score && onetime==1) {
-                        rank[0] = arrayList.size();
-                        onetime=0;
-                    }
-                    count++;
+                    arrayList3.add(0,user);
+//                    if(count<=50) arrayList2.add(0,user);
+//                    arrayList.add(0,user);
+//                    if(user.getScore()==cur_score && onetime==1) {
+//                        rank[0] = arrayList.size();
+//                        onetime=0;
+//                    }
+//                    count++;
 
                 }
 
-                HomeFragment.getInstance().home_rank.setText(String.valueOf(arrayList.size()-rank[0]+1));
-                cur_rank.setText("Rank : " + String.valueOf(arrayList.size()-rank[0]+1));
-                editor.putInt("rank",arrayList.size()-rank[0]+1);
+                for(int i=0; i<arrayList3.size(); i++){
+                    if(i<50) arrayList2.add(arrayList3.get(i));
+                    if(arrayList3.get(i).getScore() == cur_score && onetime ==1){
+                        rank[0] = i+1;
+                        onetime=0;
+                    }
+                }
+
+                if(rank[0]==0) {
+                    HomeFragment.getInstance().home_rank.setText("?");
+                    cur_rank.setText("Rank : ?");
+                }
+                else {
+                    HomeFragment.getInstance().home_rank.setText("Rank : " + String.valueOf(rank[0]));
+                    cur_rank.setText("Rank : " + String.valueOf(rank[0]));
+                }
+
+//                HomeFragment.getInstance().home_rank.setText(String.valueOf(arrayList.size()-rank[0]+1));
+//                cur_rank.setText("Rank : " + String.valueOf(arrayList.size()-rank[0]+1));
+                editor.putInt("rank",rank[0]);
                 editor.commit();
                 adapter = new RankAdapter(getContext(),arrayList2);
                 recyclerView.setAdapter(adapter);
